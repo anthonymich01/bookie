@@ -13,7 +13,8 @@ class Home extends React.Component {
   state = {
     q: "",
     booksResult: [],
-    prevY: 0
+    prevY: 0,
+    loading: false
   }
 
   timer = null
@@ -34,7 +35,6 @@ class Home extends React.Component {
   handleObserver = async (entities, observer) => {
     const y = entities[0].boundingClientRect.y
     const { q, booksResult, prevY } = this.state
-    console.log(prevY, y)
     if (prevY > y && booksResult.length > 0) {
       const offset = booksResult.length
       await this.submitSearch(q, BOOKS_LIMIT, offset)
@@ -62,6 +62,7 @@ class Home extends React.Component {
   }
 
   submitSearch = async (q, limit = BOOKS_LIMIT, offset = 0) => {
+    this.setState({ loading: true })
     try {
       const res = await getBooks(q, limit, offset)
       if (res.status === 200) {
@@ -74,10 +75,11 @@ class Home extends React.Component {
     } catch (error) {
       console.log(error)
     }
+    this.setState({ loading: false })
   }
 
   render() {
-    const { q, booksResult } = this.state
+    const { q, booksResult, loading } = this.state
 
     return (
       <>
@@ -94,14 +96,12 @@ class Home extends React.Component {
           />
         </div>
         <div className="container">
-          {booksResult.length > 0 && (
-            <div className="box">
-              <h1>Results</h1>
-              <div className="books-list">
-                <BookList books={booksResult} />
-              </div>
+          <div className="box">
+            {booksResult.length > 0 && <h1>Results</h1>}
+            <div className="books-list">
+              <BookList books={booksResult} loading={loading} />
             </div>
-          )}
+          </div>
         </div>
         <div ref={this.loadingRef} />
         <Footer />
