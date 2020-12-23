@@ -1,0 +1,11 @@
+@import "./constant";
+
+body {
+  background-color: $c-darkest !important;
+  color: $c-light !important;
+}
+
+a {
+  color: $c-light !important;
+  text-decoration: none !important;
+}

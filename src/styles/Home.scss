@@ -1,0 +1,47 @@
+@import "./constant";
+
+.subtitle {
+  margin: 5px 0 0;
+  padding: 0;
+  text-align: center;
+}
+
+.input-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
+
+  .input-box {
+    background-color: $c-dark;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 15px;
+
+    &::placeholder {
+      color: $c-light;
+      opacity: 0.8;
+    }
+  }
+}
+
+.container {
+  width: 98%;
+  margin: 20px auto;
+
+  .box {
+    h1 {
+      text-align: center;
+    }
+
+    .books-list {
+      width: 100%;
+      max-width: 1300px;
+      margin: 10px auto;
+      padding: 0 10px;
+    }
+  }
+}
